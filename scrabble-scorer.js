@@ -14,18 +14,20 @@ const oldPointStructure = {
 
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
-	let letterPoints = "";
+	let score = "";
+   let letterPoints = "";
  
 	for (let i = 0; i < word.length; i++) {
- 
-	  for (const pointValue in oldPointStructure) {
- 
-		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+   for (const pointValue in oldPointStructure) {
+      if (oldPointStructure[pointValue].includes(word[i])) {
+			score += `Points for '${word[i]}': ${pointValue}\n`
+         score += parseInt(pointValue);
+         break;
 		 }
  
 	  }
 	}
+   return score;
 	return letterPoints;
  }
 
@@ -34,11 +36,32 @@ function oldScrabbleScorer(word) {
 
 function initialPrompt() {
    console.log("Let's play some scrabble! Enter a word:");
+   let userWord = input.question("Enter a word:");
+   let score = oldScrabbleScorer(userWord);
+   console.log(`The score for the word "${userWord}" is: ${score}`);
 };
 
-let simpleScorer;
+function simpleScorer(word) {
+   word = word.toUpperCase();
+let score = "";
+for (let i = 0; i < word.length; i++) {
+   score += 1;
+}
+return score;
+}
 
-let vowelBonusScorer;
+function vowelBonusScorer(word) {
+   word = word.toUpperCase();
+let score = "";
+for (let i = 0; i < word.length; i++) {
+   if ("AEIOU".includes(word[i])) {
+      score += 3;
+   } else {
+      score += 1
+   }
+}
+return score;
+}
 
 let scrabbleScorer;
 
