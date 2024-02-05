@@ -14,7 +14,7 @@ const oldPointStructure = {
 
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
-	let score = "";
+	let score = 0;
    let letterPoints = "";
  
 	for (let i = 0; i < word.length; i++) {
@@ -43,7 +43,7 @@ function initialPrompt() {
 
 function simpleScorer(word) {
    word = word.toUpperCase();
-let score = "";
+let score = 0;
 for (let i = 0; i < word.length; i++) {
    score += 1;
 }
@@ -52,9 +52,9 @@ return score;
 
 function vowelBonusScorer(word) {
    word = word.toUpperCase();
-let score = "";
+let score = 0;
 for (let i = 0; i < word.length; i++) {
-   if ("AEIOU".includes(word[i])) {
+   if (['A', 'E', 'I', 'O', 'U'].includes(word[i])) {
       score += 3;
    } else {
       score += 1
@@ -62,7 +62,7 @@ for (let i = 0; i < word.length; i++) {
 }
 return score;
 }
-
+console.log(vowelBonusScorer("Act"));
 let scrabbleScorer;
 
 const scoringAlgorithms = [];
