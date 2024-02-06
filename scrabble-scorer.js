@@ -47,8 +47,8 @@ let score = 0;
 for (let i = 0; i < word.length; i++) {
    score += 1;
 }
-return score;
-}
+return score
+};
 
 function vowelBonusScorer(word) {
    word = word.toUpperCase();
@@ -60,8 +60,9 @@ for (let i = 0; i < word.length; i++) {
       score += 1
    }
 }
-return score;
-}
+return score
+};
+
 console.log(vowelBonusScorer("Act"));
 let scrabbleScorer;
 
@@ -69,17 +70,17 @@ const scoringAlgorithms = [
    {
       name: "Simple Score",
       description: "Each letter is worth 1 point.",
-      scoringFunction: simpleScorer
+      scorerFunction: simpleScorer
    },
    {
       name: "Bonus Vowels",
       description: "Vowels are worth 3 pts, consonants are 1 pt.",
-      scoringFunction: vowelBonusScorer
+      scorerFunction: vowelBonusScorer
    },
    {
       name: "Scrabble",
       description: "The traditional scoring algorithm",
-      scoringFunction: oldScrabbleScorer
+      scorerFunction: oldScrabbleScorer
    }
 ];
 
