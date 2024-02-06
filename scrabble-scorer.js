@@ -65,7 +65,23 @@ return score;
 console.log(vowelBonusScorer("Act"));
 let scrabbleScorer;
 
-const scoringAlgorithms = [];
+const scoringAlgorithms = [
+   {
+      name: "Simple Score",
+      description: "Each letter is worth 1 point.",
+      scoringFunction: simpleScorer
+   },
+   {
+      name: "Bonus Vowels",
+      description: "Vowels are worth 3 pts, consonants are 1 pt.",
+      scoringFunction: vowelBonusScorer
+   },
+   {
+      name: "Scrabble",
+      description: "The traditional scoring algorithm",
+      scoringFunction: oldScrabbleScorer
+   }
+];
 
 function scorerPrompt() {}
 
