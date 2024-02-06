@@ -84,7 +84,22 @@ const scoringAlgorithms = [
    }
 ];
 
-function scorerPrompt() {}
+function scorerPrompt() {
+   console.log("Let's play some Scrabble!\n");
+
+   let userWord = input.question("Enter a word to score: ");
+   console.log("Which scoring algorithm would you like to use?\n");
+
+   console.log("0 - Simple: One point per character");
+   console.log("1 - Vowel Bonus: Vowels are worth 3 points");
+   console.log("2 - Scrabble: Uses scrabble point system");
+   let algNum = input.question("Enter 0, 1, or 2: ");
+   return {
+      userWord: userWord,
+      algNum: algNum
+   }
+   //Score for 'coconut': 
+}
 
 function transform() {};
 
@@ -92,8 +107,13 @@ let newPointStructure;
 
 function runProgram() {
    initialPrompt();
-   
-}
+   let userSelection = scorerPrompt();
+   let selectedWord = userSelection.userWord;
+   let selectedIndex = userSelection.algNum;
+   let selectedAlgObject = scoringAlgorithms[selectedIndex];
+   let selectedFunction = selectedAlgObject.scorerFunction;
+   console.log(`Score for '${selectedWord}': ${selectedFunction(selectedWord)}`);
+} 
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
