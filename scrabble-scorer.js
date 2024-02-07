@@ -12,6 +12,40 @@ const oldPointStructure = {
   10: ['Q', 'Z']
 };
 
+let newPointStructure = {
+   'A': 1,
+   'B': 3,
+   'C': 3,
+   'D': 2,
+   'E': 1,
+   'F': 4,
+   'G': 2,
+   'H': 4,
+   'I': 1,
+   'J': 8,
+   'K': 5,
+   'L': 1,
+   'M': 3,
+   'N': 1,
+   'O': 1,
+   'P': 3,
+   'Q': 10,
+   'R': 1,
+   'S': 1,
+   'T': 1,
+   'U': 1,
+   'V': 4,
+   'W': 4,
+   'X': 8,
+   'Y': 4,
+   'Z': 10
+
+}
+console.log("Scrabble scoring values for");
+console.log("letter a: ", newPointStructure.A);
+console.log("letter j: ", newPointStructure.J);
+console.log("letter z: ", newPointStructure["Z"]);
+
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
 	let score = 0;
@@ -28,7 +62,6 @@ function oldScrabbleScorer(word) {
 	  }
 	}
    return score;
-	return letterPoints;
  }
 
 // your job is to finish writing these functions and variables that we've named //
@@ -101,9 +134,24 @@ function scorerPrompt() {
    //Score for 'coconut': 
 }
 
-function transform() {};
+function transform(oldPointStructure) {
+   let transformedObject = {};
+   for (let key in oldPointStructure) {
+      let letters = oldPointStructure[key];
+      for (let i = 0; i < letters.length; i++) {
+         let letter = letters[i].toLowerCase();
+         //console.log(`${key}, ${letter}`);
+        transformedObject[letter] = key;
+       // console.log(transformedObject);
+      }
+   }
+   return transformedObject;
+};
 
-let newPointStructure;
+console.log(transform(oldPointStructure));
+
+
+//let newPointStructure;
 
 function runProgram() {
    initialPrompt();
