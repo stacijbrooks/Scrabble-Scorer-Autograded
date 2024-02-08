@@ -27,8 +27,8 @@ function oldScrabbleScorer(word) {
  
 	  }
 	}
-   return score;
- }
+   return score
+ };
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
@@ -63,7 +63,19 @@ return score
 };
 
 console.log(vowelBonusScorer("Act"));
-let scrabbleScorer;
+
+let newPointStructure = transform(oldPointStructure);
+console.log(newPointStructure);
+
+
+function scrabbleScorer(word) {
+   word = word.toLowerCase();
+let score = 0;
+for (let i = 0; i < word.length; i++) {
+   score += Number(newPointStructure[word[i]]);
+}
+return score
+};
 
 const scoringAlgorithms = [
    {
@@ -79,7 +91,7 @@ const scoringAlgorithms = [
    {
       name: "Scrabble",
       description: "The traditional scoring algorithm",
-      scorerFunction: oldScrabbleScorer
+      scorerFunction: scrabbleScorer
    }
 ];
 
@@ -111,14 +123,24 @@ function transform(oldPointStructure) {
        // console.log(transformedObject);
       }
    }
-   return transformedObject;
-};
+   let unorderedObject = transformedObject;
+   let unorderedLetters = [];
+   for (let key in unorderedObject) {
+      unorderedLetters.push(key);
+   }
+   let orderedLetters = unorderedLetters.sort();
+   let orderedObject = {};
+   for (let i = 0; i < orderedLetters.length; i++) {
+      orderedObject[orderedLetters[i]] = Number(unorderedObject[orderedLetters[i]]);
+   }
+   return orderedObject;
+   //console.log(transformedObject);
+}
 
 //console.log(transform(oldPointStructure));
 
 
-let newPointStructure = transform(oldPointStructure);
-console.log(newPointStructure);
+
 
 function runProgram() {
    initialPrompt();
