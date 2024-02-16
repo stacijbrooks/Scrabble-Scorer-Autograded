@@ -14,21 +14,20 @@ const oldPointStructure = {
 
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
-	let score = 0;
-   let letterPoints = "";
+	let letterPoints = "";
  
 	for (let i = 0; i < word.length; i++) {
-   for (const pointValue in oldPointStructure) {
-      if (oldPointStructure[pointValue].includes(word[i])) {
-			score += `Points for '${word[i]}': ${pointValue}\n`
-         score += parseInt(pointValue);
-         break;
+ 
+	  for (const pointValue in oldPointStructure) {
+ 
+		 if (oldPointStructure[pointValue].includes(word[i])) {
+			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
 		 }
  
 	  }
 	}
-   return score
- };
+	return letterPoints;
+ }
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
@@ -63,20 +62,16 @@ for (let i = 0; i < word.length; i++) {
 return score
 };
 
-//console.log(vowelBonusScorer("Act"));
-
-
-
-
 
 function scrabbleScorer(word) {
    word = word.toUpperCase();
 let score = 0;
 for (let i = 0; i < word.length; i++) {
-   score += newPointStructure[word[i]];
+   score += newPointStructure[word[i]] || 0;
 }
 return score
 };
+
 
 const scoringAlgorithms = [
    {
@@ -99,7 +94,7 @@ const scoringAlgorithms = [
 function scorerPrompt() {
    console.log("Let's play some Scrabble!\n");
 
-   let userWord = input.question("Enter a word to score: ");
+   //let userWord = input.question("Enter a word to score: ");
    console.log("Which scoring algorithm would you like to use?\n");
    console.log("0 - Simple: One point per character");
    console.log("1 - Vowel Bonus: Vowels are worth 3 points");
@@ -115,42 +110,21 @@ function transform(oldPointStructure) {
    for (let key in oldPointStructure) {
       let letters = oldPointStructure[key];
       for (let i = 0; i < letters.length; i++) {
-         let letter = letters[i].toLowerCase();
+         let letter = letters[i].toUpperCase();
         transformedObject[letter] = Number(key);
       }
    }
-
-  
-   //console.log(transformedObject);
-   // let unorderedObject = transformedObject;
-   // let unorderedLetters = [];
-   // for (let key in unorderedObject) {
-   //    unorderedLetters.push(key);
-   // }
-   // let orderedLetters = unorderedLetters.sort();
-   // let orderedObject = {};
-   // for (let i = 0; i < orderedLetters.length; i++) {
-   //    orderedObject[orderedLetters[i]] = Number(unorderedObject[orderedLetters[i]]);
-   // }
-   // return orderedObject;
-   //console.log(transformedObject);
+   return transformedObject;
 }
 
 let newPointStructure = transform(oldPointStructure);
 
 
-
-
-
 function runProgram() {
- let userWord = initialPrompt();
-   let userSelection = scorerPrompt().scorerFunction;
-   let score = userSelection(userWord);
-   // let selectedWord = userSelection.userWord;
-   // let selectedIndex = userSelection.algNum;
-   // let selectedAlgObject = scoringAlgorithms[selectedIndex];
-   // let selectedFunction = selectedAlgObject.scorerFunction;
-   console.log(`Score for '${userWord}': ${userSelection(userWord)}`);
+   let userWord = initialPrompt();
+    let userSelection = scorerPrompt().scorerFunction;
+    let score = userSelection(userWord);
+    console.log(`Score for '${userWord}': ${score}`);
 } 
 
 // Don't write any code below this line //
