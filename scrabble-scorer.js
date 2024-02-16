@@ -36,8 +36,9 @@ function oldScrabbleScorer(word) {
 function initialPrompt() {
    console.log("Let's play some scrabble! Enter a word:");
    let userWord = input.question("Enter a word:");
-   let score = oldScrabbleScorer(userWord);
-   console.log(`The score for the word "${userWord}" is: ${score}`);
+   //let score = oldScrabbleScorer(userWord);
+   //console.log(`The score for the word "${userWord}" is: ${score}`);
+   return userWord
 };
 
 function simpleScorer(word) {
@@ -62,17 +63,17 @@ for (let i = 0; i < word.length; i++) {
 return score
 };
 
-console.log(vowelBonusScorer("Act"));
+//console.log(vowelBonusScorer("Act"));
 
-let newPointStructure = transform(oldPointStructure);
-console.log(newPointStructure);
+
+
 
 
 function scrabbleScorer(word) {
-   word = word.toLowerCase();
+   word = word.toUpperCase();
 let score = 0;
 for (let i = 0; i < word.length; i++) {
-   score += Number(newPointStructure[word[i]]);
+   score += newPointStructure[word[i]];
 }
 return score
 };
@@ -100,15 +101,12 @@ function scorerPrompt() {
 
    let userWord = input.question("Enter a word to score: ");
    console.log("Which scoring algorithm would you like to use?\n");
-
    console.log("0 - Simple: One point per character");
    console.log("1 - Vowel Bonus: Vowels are worth 3 points");
    console.log("2 - Scrabble: Uses scrabble point system");
-   let algNum = input.question("Enter 0, 1, or 2: ");
-   return {
-      userWord: userWord,
-      algNum: algNum
-   }
+   let algNum = Number(input.question("Enter 0, 1, or 2: "));
+   return scoringAlgorithms[algNum];
+
    //Score for 'coconut': 
 }
 
@@ -118,38 +116,41 @@ function transform(oldPointStructure) {
       let letters = oldPointStructure[key];
       for (let i = 0; i < letters.length; i++) {
          let letter = letters[i].toLowerCase();
-         //console.log(`${key}, ${letter}`);
-        transformedObject[letter] = key;
-       // console.log(transformedObject);
+        transformedObject[letter] = Number(key);
       }
    }
-   let unorderedObject = transformedObject;
-   let unorderedLetters = [];
-   for (let key in unorderedObject) {
-      unorderedLetters.push(key);
-   }
-   let orderedLetters = unorderedLetters.sort();
-   let orderedObject = {};
-   for (let i = 0; i < orderedLetters.length; i++) {
-      orderedObject[orderedLetters[i]] = Number(unorderedObject[orderedLetters[i]]);
-   }
-   return orderedObject;
+
+  
+   //console.log(transformedObject);
+   // let unorderedObject = transformedObject;
+   // let unorderedLetters = [];
+   // for (let key in unorderedObject) {
+   //    unorderedLetters.push(key);
+   // }
+   // let orderedLetters = unorderedLetters.sort();
+   // let orderedObject = {};
+   // for (let i = 0; i < orderedLetters.length; i++) {
+   //    orderedObject[orderedLetters[i]] = Number(unorderedObject[orderedLetters[i]]);
+   // }
+   // return orderedObject;
    //console.log(transformedObject);
 }
 
-//console.log(transform(oldPointStructure));
+let newPointStructure = transform(oldPointStructure);
+
 
 
 
 
 function runProgram() {
-   initialPrompt();
-   let userSelection = scorerPrompt();
-   let selectedWord = userSelection.userWord;
-   let selectedIndex = userSelection.algNum;
-   let selectedAlgObject = scoringAlgorithms[selectedIndex];
-   let selectedFunction = selectedAlgObject.scorerFunction;
-   console.log(`Score for '${selectedWord}': ${selectedFunction(selectedWord)}`);
+ let userWord = initialPrompt();
+   let userSelection = scorerPrompt().scorerFunction;
+   let score = userSelection(userWord);
+   // let selectedWord = userSelection.userWord;
+   // let selectedIndex = userSelection.algNum;
+   // let selectedAlgObject = scoringAlgorithms[selectedIndex];
+   // let selectedFunction = selectedAlgObject.scorerFunction;
+   console.log(`Score for '${userWord}': ${userSelection(userWord)}`);
 } 
 
 // Don't write any code below this line //
