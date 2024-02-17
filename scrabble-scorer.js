@@ -13,7 +13,7 @@ const oldPointStructure = {
 };
 
 function oldScrabbleScorer(word) {
-	word = word.toUpperCase();
+	word = word.toLowerCase();
 	let letterPoints = "";
  
 	for (let i = 0; i < word.length; i++) {
@@ -41,7 +41,7 @@ function initialPrompt() {
 };
 
 function simpleScorer(word) {
-   word = word.toUpperCase();
+   word = word.toLowerCase();
 let score = 0;
 for (let i = 0; i < word.length; i++) {
    score += 1;
@@ -50,10 +50,10 @@ return score
 };
 
 function vowelBonusScorer(word) {
-   word = word.toUpperCase();
+   word = word.toLowerCase();
 let score = 0;
 for (let i = 0; i < word.length; i++) {
-   if (['A', 'E', 'I', 'O', 'U'].includes(word[i])) {
+   if (['a', 'e', 'i', 'o', 'u'].includes(word[i])) {
       score += 3;
    } else {
       score += 1
@@ -64,7 +64,7 @@ return score
 
 
 function scrabbleScorer(word) {
-   word = word.toUpperCase();
+   word = word.toLowerCase();
 let score = 0;
 for (let i = 0; i < word.length; i++) {
    score += newPointStructure[word[i]] || 0;
@@ -110,7 +110,7 @@ function transform(oldPointStructure) {
    for (let key in oldPointStructure) {
       let letters = oldPointStructure[key];
       for (let i = 0; i < letters.length; i++) {
-         let letter = letters[i].toUpperCase();
+         let letter = letters[i].toLowerCase();
         transformedObject[letter] = Number(key);
       }
    }
