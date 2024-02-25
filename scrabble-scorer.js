@@ -92,7 +92,7 @@ const scoringAlgorithms = [
 ];
 
 function scorerPrompt() {
-   console.log("Let's play some Scrabble!\n");
+   //console.log("Let's play some Scrabble!\n");
 
    //let userWord = input.question("Enter a word to score: ");
    console.log("Which scoring algorithm would you like to use?\n");
